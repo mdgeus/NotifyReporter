@@ -55,7 +55,7 @@ class NotifyReporterPlugin extends MantisPlugin {
         //$schema[] = array('InsertData', array(plugin_table('settings'), " (set_descr, set_value) VALUES ('message', 'This is the actual email message')"));
         #end v1.00
         # v1.01
-        $schema[] = array('AddColumnSQL', array(plugin_table('settings'), "projectid I NULL default NULL AFTER set_value \" '' \""));
+        $schema[] = array('AddColumnSQL', array(plugin_table('settings'), "projectid I  default NULL AFTER set_value \" '' \""));
         $schema[] = Array('RenameColumnSQL', Array(plugin_table('settings'), "set_descr", "subject", "set_descr C(200) default NULL" ) );
         $schema[] = Array('RenameColumnSQL', Array(plugin_table('settings'), "set_value", "message", "set_value XL     default NULL" ) );
 
