@@ -7,6 +7,8 @@ Mantis Bugtracker plugin
 
 After reporting an issue send an email to the reporter.
 You can set the subject and mailtext in the plugin config.
+This messeage is set per project.
+If no message is available for the project nothing will be send.
 
 == Installation ==
 
@@ -22,6 +24,10 @@ Find the notify plugin and click install.
 
 == Changelog ==
 
+
+= 1.0.1 =
+added delete option
+you cann set email message per project
 
 = 1.0.0 =
 First stable

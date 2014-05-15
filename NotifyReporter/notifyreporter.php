@@ -5,7 +5,7 @@ class NotifyReporterPlugin extends MantisPlugin {
     function register() {
         $this->name = 'Notify reporter';
         $this->description = 'Send email after reporting an issue to the reporter with a predefined text';
-        $this->version = '1.00';
+        $this->version = '1.01';
         $this->requires = array('MantisCore' => '1.2.0');
         $this->author = 'Dennis Geus';
         $this->contact = 'Dennis@hands-off.it';
@@ -25,14 +25,13 @@ class NotifyReporterPlugin extends MantisPlugin {
         # check the table for entries, check if someone has to be notified and email the notification
         $bug_id = $p_bugdata->id;
         $reporter_id = $p_bugdata->reporter_id;
+        $project_id = $p_bugdata->project_id;
 
         # send the email to the reporter
-        email_notifyreporter($reporter_id, $bug_id);
+        email_notifyreporter($reporter_id, $bug_id, $project_id);
     }
 
     /** uninstall and install functions * */
-
-
     function uninstall() {
         global $g_db;
         # remove the table created at installation
@@ -52,16 +51,15 @@ class NotifyReporterPlugin extends MantisPlugin {
                                 set_descr C(200) default NULL,
 				set_value XL     default NULL
 				"));
-         $schema[] = array('InsertData', array(plugin_table('settings'),"
-             (set_descr, set_value) VALUES ('subject', 'This is the subject')
-             "));
-         $schema[] = array('InsertData', array(plugin_table('settings'),"
-             (set_descr, set_value) VALUES ('message', 'This is the actual email message')
-             "));
-         #end v1.00
+        //$schema[] = array('InsertData', array(plugin_table('settings'), " (set_descr, set_value) VALUES ('subject', 'This is the subject') "));
+        //$schema[] = array('InsertData', array(plugin_table('settings'), " (set_descr, set_value) VALUES ('message', 'This is the actual email message')"));
+        #end v1.00
+        # v1.01
+        $schema[] = array('AddColumnSQL', array(plugin_table('settings'), "projectid I NULL default NULL AFTER set_value \" '' \""));
+        $schema[] = Array('RenameColumnSQL', Array(plugin_table('settings'), "set_descr", "subject", "set_descr C(200) default NULL" ) );
+        $schema[] = Array('RenameColumnSQL', Array(plugin_table('settings'), "set_value", "message", "set_value XL     default NULL" ) );
 
-         return $schema;
-
+        return $schema;
     }
 
 }
