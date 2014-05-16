@@ -13,10 +13,12 @@ if (!function_exists('email_notifyreporter')) {
             $row = db_fetch_array($result);
 
             $email = user_get_email($recipient);
-            $subject = $row['subject'];
+            $subj = $row['subject'];
             $message = $row['message'];
 
+            $subject = str_replace('{BUGID}', $bug_id, $subj);
             $contents = str_replace('{BUGID}', $bug_id, $message);
+
 
             if (!is_blank($email)) {
                 email_store($email, $subject, $contents);
