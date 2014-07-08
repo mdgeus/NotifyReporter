@@ -90,6 +90,7 @@ if (isset($_POST['del'])) {
 
 if (isset($_POST['save'])) {
 # insert it
+
     $id = $_POST['id'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
@@ -97,6 +98,7 @@ if (isset($_POST['save'])) {
     $ins_sql = "UPDATE $plug_table
                     SET subject = '" . $subject . "',
                         message = '" . $message . "'
+                        WHERE id=$id
                     ";
     $insert = db_query_bound($ins_sql);
     if ($insert) {
@@ -136,6 +138,9 @@ if (!$_POST) {
                     <td> <form name="editline" id="editline" method="post" action="<?php echo plugin_page('config') ?>">
                             <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>" />
                             <button name="edit" id="edit" onclick="this.form.submit();"><img src="<?php echo config_get('path'); ?>plugins/NotifyReporter/img/glyphicons_150_edit.png" height="16" border="0" /></button>
+                        </form>
+                        <form name="editline" id="editline" method="post" action="<?php echo plugin_page('config') ?>">
+                                <input type="hidden" name="id" id="id" value="<?php echo $row['id']; ?>" />
                             <button name="del" id="del" onclick="this.form.submit();"><img src="<?php echo config_get('path'); ?>plugins/NotifyReporter/img/glyphicons_016_bin.png" height="16" border="0" /></button>
                         </form>
                     </td>

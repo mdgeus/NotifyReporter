@@ -5,7 +5,7 @@ class NotifyReporterPlugin extends MantisPlugin {
     function register() {
         $this->name = 'Notify reporter';
         $this->description = 'Send email after reporting an issue to the reporter with a predefined text';
-        $this->version = '1.01';
+        $this->version = '1.02';
         $this->requires = array('MantisCore' => '1.2.0');
         $this->author = 'Dennis Geus';
         $this->contact = 'Dennis@hands-off.it';

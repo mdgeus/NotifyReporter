@@ -24,6 +24,9 @@ Find the notify plugin and click install.
 
 == Changelog ==
 
+= 1.0.2 =
+Fixed saving an entry. It was overwriting all entries.
+Fixed deleting an entry. It was deleting all entries.
 
 = 1.0.1 =
 added delete option
@@ -31,4 +34,3 @@ you cann set email message per project
 
 = 1.0.0 =
 First stable
-
